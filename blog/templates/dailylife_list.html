@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dailylife --share happiness!{% endblock %}
+      <body>
+        <!-- Navigation-->
+
+        <!-- Page Header-->
+        {% block header %}
+        <header class="masthead" style="background-image: url({% static 'assets/img/home-bg.jpg' %})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Clean Blog</h1>
+                            <span class="subheading">Dailylifeのコレクション</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% endblock %}
+        <!-- Main Content-->
+        {% block contents %}
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    {% for record in dailylife_records %}
+                    <div class="post-preview">
+                        <a href="{% url 'blog:blog_detail' record.pk %}">
+                            <h2 class="post-title">{{record.title}}</h2>
+                            <h3 class="post-subtitle"><span style="font-size:16pt"{{record.content|truncatechars:50}}</span></h3>
+                        </a>
+                        <p class="post-meta">
+                            <a href="#">zackmaaash</a>
+                            {{recird.posted_at}}に投稿/カテゴリ:{{record.category}}
+                        </p>
+                    </div>
+                    <hr class="my-4" />
+                    <!-- Divider-->
+                    {% endfor %}
+                    <!-- Post preview-->
+
+                    <!-- Pager-->
+                    {% include "pagenation.html" %}
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4" />
+        {% endblock %}
+        <!-- Footer-->
